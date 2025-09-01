@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Saurabh Kumar • Portfolio</title>
+  <meta name="description" content="Saurabh Kumar — MERN stack developer. Projects, skills, and contact."/>
+  <meta name="theme-color" content="#0ea5e9"/>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-bx6FqX1w0b2Jk5Ww0D1i9P2kqQ6H7Yk2kz2xG3i3L0c5g8sQfI9zZfZg5v3sS3cP+gk8bZz3v4m9z1f0s7w8g==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+  <style>
+    :root{
+      --bg: #0b1220;
+      --panel: rgba(255,255,255,0.06);
+      --text: #e6eaf2;
+      --muted:#a9b3c9;
+      --brand:#0ea5e9; /* sky-500 */
+      --brand-2:#22d3ee; /* cyan-400 */
+      --accent:#a78bfa; /* violet-400 */
+      --ring: rgba(14,165,233,.35);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+    }
+    [data-theme="light"]{
+      --bg:#f7f9fc;
+      --panel: rgba(15,23,42,0.05);
+      --text:#0f172a;
+      --muted:#4b5563;
+      --ring: rgba(2,132,199,.2);
+      --shadow: 0 10px 30px rgba(2,6,23,.08);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 80% -10%, rgba(34,211,238,.14), transparent 60%),
+        radial-gradient(800px 400px at -10% 10%, rgba(167,139,250,.12), transparent 60%),
+        var(--bg);
+      line-height:1.65;
+      letter-spacing:.2px;
+    }
+    a{color:var(--brand); text-decoration:none}
+    a:hover{opacity:.9}
+
+    /* Layout */
+    .container{max-width:1120px; margin:0 auto; padding:0 20px}
+    .grid{display:grid; gap:22px}
+    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+
+    /* Navbar */
+    .nav{position:sticky; top:0; z-index:50; backdrop-filter:saturate(140%) blur(10px); background:linear-gradient(180deg, rgba(15,23,42,.65), rgba(15,23,42,0)); border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav .inner{display:flex; align-items:center; justify-content:space-between; height:72px}
+    .brand{display:flex; gap:10px; align-items:center; font-weight:800; letter-spacing:.5px}
+    .brand .dot{width:10px;height:10px;border-radius:999px;background:linear-gradient(135deg,var(--brand),var(--accent)); box-shadow:0 0 0 6px var(--ring)}
+    .navlinks{display:flex; gap:18px; align-items:center}
+    .navlinks a{color:var(--text); padding:10px 14px; border-radius:12px}
+    .navlinks a:hover{background:var(--panel)}
+    .hamburger{display:none; background:transparent; border:0; color:var(--text); font-size:22px}
+
+    /* Hero */
+    .hero{padding:96px 0 56px}
+    .hero .title{font-family:"Space Grotesk",Inter,system-ui; font-size:clamp(32px,5vw,56px); line-height:1.05; margin:0 0 14px}
+    .hero .subtitle{font-size:clamp(16px,2.4vw,18px); color:var(--muted); margin:0 0 26px}
+    .chip{display:inline-flex; align-items:center; gap:8px; background:var(--panel); border:1px solid rgba(255,255,255,.08); padding:8px 12px; border-radius:999px; font-size:13px; color:var(--muted)}
+    .cta{display:flex; gap:12px; flex-wrap:wrap}
+    .btn{appearance:none; border:0; padding:12px 16px; border-radius:14px; font-weight:600; cursor:pointer; transition:.2s transform ease, .2s box-shadow ease, .2s background ease; box-shadow:var(--shadow)}
+    .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#001018}
+    .btn-ghost{background:transparent; border:1px solid rgba(255,255,255,.12); color:var(--text)}
+    .btn:hover{transform:translateY(-2px)}
+
+    /* Cards */
+    .card{background:linear-gradient( to bottom right, rgba(255,255,255,.08), rgba(255,255,255,.04)); border:1px solid rgba(255,255,255,.12); border-radius:var(--radius); padding:22px; box-shadow:var(--shadow)}
+
+    /* Sections */
+    section{padding:40px 0}
+    .section-title{font-size:22px; font-weight:800; margin:0 0 14px; letter-spacing:.3px}
+    .section-sub{color:var(--muted); font-size:14px; margin:0 0 18px}
+
+    /* Skills */
+    .tags{display:flex; flex-wrap:wrap; gap:10px}
+    .tag{padding:10px 12px; border-radius:12px; background:var(--panel); border:1px solid rgba(255,255,255,.08); font-size:13px}
+
+    /* Projects */
+    .project{display:flex; flex-direction:column; gap:12px}
+    .project h3{margin:0; font-size:18px}
+    .meta{display:flex; flex-wrap:wrap; gap:10px; color:var(--muted); font-size:13px}
+
+    /* Timeline */
+    .timeline{position:relative;}
+    .timeline:before{content:""; position:absolute; left:14px; top:0; bottom:0; width:2px; background:linear-gradient(var(--brand), transparent)}
+    .t-item{position:relative; padding-left:44px; margin:18px 0}
+    .t-item:before{content:""; position:absolute; left:8px; top:8px; width:12px; height:12px; border-radius:99px; background:linear-gradient(135deg,var(--brand),var(--accent)); box-shadow:0 0 0 6px var(--ring)}
+
+    /* Footer */
+    footer{padding:40px 0 80px; color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width: 960px){
+      .grid-3{grid-template-columns:1fr 1fr}
+      .navlinks{display:none}
+      .hamburger{display:inline-flex}
+    }
+    @media (max-width: 640px){
+      .grid-2,.grid-3{grid-template-columns:1fr}
+      .hero{padding-top:72px}
+    }
+
+    /* Reveal Animations */
+    .reveal{opacity:0; transform:translateY(10px); transition:all .6s ease}
+    .reveal.show{opacity:1; transform:translateY(0)}
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="nav">
+    <div class="container inner">
+      <a href="#home" class="brand"><span class="dot"></span> <span>Saurabh Kumar</span></a>
+      <div class="navlinks" id="navlinks">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#education">Education</a>
+        <a href="#certs">Certifications</a>
+        <a href="#contact">Contact</a>
+        <button id="themeBtn" class="btn btn-ghost" title="Toggle theme"><i class="fa-solid fa-circle-half-stroke"></i></button>
+      </div>
+      <button class="hamburger" id="menuBtn" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header id="home" class="hero container">
+    <div class="grid grid-2" style="align-items:center; gap:32px">
+      <div>
+        <span class="chip"><i class="fa-solid fa-code"></i> MERN • REST APIs • Cloudinary</span>
+        <h1 class="title">Building fast, clean, and scalable web apps.</h1>
+        <p class="subtitle">I'm Saurabh Kumar, a results-driven Computer Science student specializing in the MERN stack (MongoDB, Express.js, React.js, Node.js). I focus on performance, DX, and delightful user experiences.</p>
+        <div class="cta">
+          <!-- TODO: Replace # with a public resume link (e.g., Google Drive or your domain) -->
+          <a class="btn btn-primary" href="#" target="_blank" rel="noopener" title="Download Resume">Download résumé</a>
+          <a class="btn btn-ghost" href="https://github.com/saurabh9798" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/its-saurabh/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+        </div>
+      </div>
+      <div class="card reveal" style="text-align:center">
+        <img alt="Saurabh avatar" src="https://api.dicebear.com/7.x/initials/svg?seed=Saurabh%20Kumar&radius=50&fontFamily=Space%20Grotesk&backgroundType=gradientLinear&backgroundColor=b6e3f4,c0aede,d1d4f9" style="width:160px; height:160px; border-radius:24px; display:block; margin:10px auto 14px"/>
+        <h3 style="margin:0 0 4px">Saurabh Kumar</h3>
+        <div class="meta">MERN Stack Developer • Patna, India</div>
+        <div style="margin-top:12px; display:flex; justify-content:center; gap:10px; flex-wrap:wrap">
+          <a class="tag" href="mailto:saurabhshaw20843@gmail.com"><i class="fa-solid fa-envelope"></i> Email</a>
+          <a class="tag" href="tel:+919798389173"><i class="fa-solid fa-phone"></i> Call</a>
+          <a class="tag" href="#contact"><i class="fa-solid fa-paper-plane"></i> Hire Me</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about" class="container">
+    <div class="grid grid-2">
+      <div class="card reveal">
+        <h2 class="section-title">About</h2>
+        <p>
+          I build full‑stack web applications with a focus on clean architecture, accessibility, and smooth interactions. I'm comfortable across the stack—from crafting elegant React frontends to designing robust Node.js/Express APIs and integrating cloud storage with Cloudinary. I love solving problems and continuously improving performance and developer experience.
+        </p>
+        <p class="section-sub">Actively exploring system design, data structures & algorithms, and modern UI patterns.</p>
+        <div class="tags" aria-label="Highlights">
+          <span class="tag">Performance‑minded</span>
+          <span class="tag">Accessible UX</span>
+          <span class="tag">Clean code</span>
+          <span class="tag">Problem solver (200+ DSA)</span>
+        </div>
+      </div>
+      <div class="card reveal">
+        <h2 class="section-title">Quick Facts</h2>
+        <ul style="margin:0; padding-left:18px">
+          <li>3rd‑year BCA (Patliputra University, 2022–2025)</li>
+          <li>Brand Ambassador, CIMAGE Group of Institutions</li>
+          <li>Active in coding clubs, hackathons, and tech events</li>
+          <li>Hobbies: football, reading, music</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="container">
+    <div class="card reveal">
+      <h2 class="section-title">Skills</h2>
+      <p class="section-sub">Languages, frameworks, tools & ecosystems I use day‑to‑day.</p>
+      <div class="grid grid-3">
+        <div>
+          <h3>Languages</h3>
+          <div class="tags">
+            <span class="tag">C</span><span class="tag">C++</span><span class="tag">Java</span>
+            <span class="tag">JavaScript</span><span class="tag">Python</span><span class="tag">SQL</span>
+          </div>
+        </div>
+        <div>
+          <h3>Web / Frameworks</h3>
+          <div class="tags">
+            <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Bootstrap</span>
+            <span class="tag">Tailwind</span><span class="tag">React</span>
+            <span class="tag">Express</span><span class="tag">Node.js</span>
+            <span class="tag">REST APIs</span>
+          </div>
+        </div>
+        <div>
+          <h3>Tools & Platforms</h3>
+          <div class="tags">
+            <span class="tag">Git & GitHub</span><span class="tag">VS Code</span>
+            <span class="tag">Postman</span><span class="tag">Cloudinary</span>
+            <span class="tag">NPM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="container">
+    <div class="card reveal">
+      <h2 class="section-title">Projects</h2>
+      <div class="grid grid-2">
+        <article class="project card" style="background:transparent">
+          <div class="meta"><span><i class="fa-regular fa-calendar"></i> Nov 2024 – Feb 2025</span> <span>Full‑stack</span></div>
+          <h3>Job Portal</h3>
+          <p>Full‑stack job portal with authentication, job application management, recruiter shortlisting, advanced search, profile creation, and résumé uploads. Integrated Cloudinary for secure media storage.</p>
+          <div class="cta">
+            <a class="btn btn-ghost" href="https://github.com/saurabh9798/job-portal" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Source</a>
+          </div>
+        </article>
+        <article class="project card" style="background:transparent">
+          <div class="meta"><span><i class="fa-regular fa-calendar"></i> Jul 2024 – Oct 2024</span> <span>Full‑stack</span></div>
+          <h3>Wanderlust</h3>
+          <p>Travel booking platform (Airbnb‑style) enabling property listings and reservations. Interactive front‑end and secure Node.js/Express backend with MongoDB. Cloudinary powers efficient image storage.</p>
+          <div class="cta">
+            <a class="btn btn-ghost" href="https://github.com/saurabh9798/majorproject" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Source</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" class="container">
+    <div class="card reveal">
+      <h2 class="section-title">Education</h2>
+      <div class="timeline">
+        <div class="t-item">
+          <h3 style="margin:.2rem 0">BCA — Bachelor of Computer Applications</h3>
+          <div class="meta">Patliputra University, Patna • 2022 – 2025</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certs" class="container">
+    <div class="card reveal">
+      <h2 class="section-title">Certifications</h2>
+      <ul style="margin:0; padding-left:18px">
+        <li>HTML5, CSS3, C, C++ — IIT Bombay</li>
+        <li>Java Basics — HackerRank</li>
+        <li>Web Development — Apna College</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="container">
+    <div class="grid grid-2">
+      <div class="card reveal">
+        <h2 class="section-title">Contact</h2>
+        <p class="section-sub">Ready to collaborate or hire? Drop a message.</p>
+        <form id="contactForm" class="grid" style="gap:14px">
+          <input required class="input" name="name" placeholder="Your name"/>
+          <input required class="input" name="email" type="email" placeholder="Email"/>
+          <textarea required class="input" name="message" rows="4" placeholder="Tell me about your project…"></textarea>
+          <button class="btn btn-primary" type="submit">Send Message</button>
+          <small id="formMsg" class="section-sub" role="status"></small>
+        </form>
+      </div>
+      <div class="card reveal">
+        <h2 class="section-title">Elsewhere</h2>
+        <div class="tags">
+          <a class="tag" href="mailto:saurabhshaw20843@gmail.com"><i class="fa-solid fa-envelope"></i> saurabhshaw20843@gmail.com</a>
+          <a class="tag" href="tel:+919798389173"><i class="fa-solid fa-phone"></i> +91 97983 89173</a>
+          <a class="tag" href="https://github.com/saurabh9798" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> github.com/saurabh9798</a>
+          <a class="tag" href="https://www.linkedin.com/in/its-saurabh/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> /in/its-saurabh</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="container">
+    <div class="grid" style="justify-items:center">
+      <div style="text-align:center">
+        <div style="margin-bottom:10px">Made with <i class="fa-solid fa-heart"></i> & a lot of coffee.</div>
+        <div style="font-size:13px">© <span id="year"></span> Saurabh Kumar • All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <style>
+    /* Inputs */
+    .input{width:100%; padding:12px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.12); background:var(--panel); color:var(--text); outline:none}
+    .input:focus{border-color:var(--brand); box-shadow:0 0 0 6px var(--ring)}
+  </style>
+
+  <script>
+    // Mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const nav = document.getElementById('navlinks');
+    menuBtn?.addEventListener('click', ()=>{
+      const open = nav.style.display === 'flex';
+      nav.style.display = open ? 'none' : 'flex';
+    });
+
+    // Theme toggle (persist)
+    const themeBtn = document.getElementById('themeBtn');
+    const applyTheme = (t)=> document.documentElement.setAttribute('data-theme', t);
+    const getPref = ()=> localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light':'dark');
+    applyTheme(getPref());
+    themeBtn?.addEventListener('click', ()=>{
+      const next = (document.documentElement.getAttribute('data-theme')||'dark') === 'dark' ? 'light' : 'dark';
+      applyTheme(next); localStorage.setItem('theme', next);
+    });
+
+    // Scroll reveal
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target);} });
+    },{threshold: .2});
+    document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+
+    // Smooth anchor scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
+      });
+    });
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Contact form (client‑side only demo)
+    const form = document.getElementById('contactForm');
+    const msg = document.getElementById('formMsg');
+    form?.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      // You can replace this with a real endpoint (EmailJS, Formspree, your API)
+      console.log('Contact form:', data);
+      msg.textContent = 'Thanks! Your message has been logged locally.';
+      form.reset();
+    });
+  </script>
+</body>
+</html>
